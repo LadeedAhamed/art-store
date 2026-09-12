@@ -9,7 +9,8 @@ import styles from './Header.module.css'
 const navLinks = [
   { href: '/shop', label: 'Shop' },
   { href: '/collections/originals', label: 'Originals' },
-  { href: '/orders/track', label: 'Track Order' },
+  { href: '/collections/prints', label: 'Prints' },
+  { href: '/subscriptions', label: 'Print Club' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]

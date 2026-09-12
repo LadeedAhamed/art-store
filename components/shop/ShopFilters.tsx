@@ -18,7 +18,7 @@ const categories = [
 ]
 
 const collections = [
-  { value: 'landscapes', label: 'Landscapes & Horizon' },
+  { value: 'food-drink', label: 'Food & Drink Still Life' },
   { value: 'still-life', label: 'Still Life & Form' },
   { value: 'botanicals', label: 'Botanicals & Flora' },
 ]
