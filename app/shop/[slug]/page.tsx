@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db'
 import AddToCartForm from '@/components/shop/AddToCartForm'
 import ProductCard from '@/components/shop/ProductCard'
 import ArtworkViewer from '@/components/shop/ArtworkViewer'
+import { INITIAL_PRODUCTS } from '@/lib/products-data'
 import styles from './page.module.css'
 import type { Metadata } from 'next'
 
@@ -15,23 +16,25 @@ interface Props {
 async function getProduct(slug: string) {
   try {
     const product = await prisma.product.findUnique({ where: { slug } })
-    if (!product || !product.isActive) return null
-    return product
+    if (product && product.isActive) return product
   } catch (err) {
     console.error('getProduct error:', err)
-    return null
   }
+
+  const fallback = INITIAL_PRODUCTS.find((p) => p.slug === slug && p.isActive)
+  return fallback ?? null
 }
 
 async function getRelatedProducts(category: string, id: string) {
   try {
-    return await prisma.product.findMany({
+    const dbRelated = await prisma.product.findMany({
       where: { category, id: { not: id }, isActive: true },
       take: 4,
     })
-  } catch {
-    return []
-  }
+    if (dbRelated.length > 0) return dbRelated
+  } catch {}
+
+  return INITIAL_PRODUCTS.filter((p) => p.category === category && p.id !== id && p.isActive).slice(0, 4)
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

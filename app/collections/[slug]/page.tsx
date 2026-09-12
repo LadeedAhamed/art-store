@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import ProductCard from '@/components/shop/ProductCard'
+import { INITIAL_PRODUCTS, StaticProduct } from '@/lib/products-data'
 import styles from './page.module.css'
 import type { Metadata } from 'next'
 
@@ -42,12 +43,6 @@ const collectionMeta: Record<string, { title: string; subtitle: string; descript
     description: 'Contemplative floral and plant still lifes celebrating transient seasonal beauty.',
     filter: { collection: 'botanicals', isActive: true },
   },
-  'food-drink': {
-    title: 'Food & Drink Still Life',
-    subtitle: 'Culinary Celebrations',
-    description: 'Vibrant paintings exploring food, cocktails, and the warm conviviality of gathering around the table.',
-    filter: { collection: 'food-drink', isActive: true },
-  },
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -64,10 +59,20 @@ export default async function CollectionPage({ params }: Props) {
   const meta = collectionMeta[slug]
   if (!meta) notFound()
 
-  const products = await prisma.product.findMany({
-    where: meta.filter,
-    orderBy: { createdAt: 'desc' },
-  })
+  let products: StaticProduct[] = []
+  try {
+    const dbProducts = await prisma.product.findMany({
+      where: meta.filter,
+      orderBy: { createdAt: 'desc' },
+    })
+    if (dbProducts.length > 0) products = dbProducts
+  } catch {}
+
+  if (products.length === 0) {
+    if (slug === 'originals') products = INITIAL_PRODUCTS.filter((p) => p.isOriginal && p.isActive)
+    else if (slug === 'prints') products = INITIAL_PRODUCTS.filter((p) => p.category === 'print' && p.isActive)
+    else products = INITIAL_PRODUCTS.filter((p) => p.collection === slug && p.isActive)
+  }
 
   return (
     <div className={styles.page}>

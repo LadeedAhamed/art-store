@@ -3,20 +3,22 @@ import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import ProductCard from '@/components/shop/ProductCard'
 import NewsletterForm from '@/components/ui/NewsletterForm'
+import { INITIAL_PRODUCTS } from '@/lib/products-data'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
 
 async function getFeaturedProducts() {
   try {
-    return await prisma.product.findMany({
+    const dbFeatured = await prisma.product.findMany({
       where: { isFeatured: true, isActive: true },
       take: 6,
       orderBy: { createdAt: 'desc' },
     })
-  } catch {
-    return []
-  }
+    if (dbFeatured.length > 0) return dbFeatured
+  } catch {}
+
+  return INITIAL_PRODUCTS.filter((p) => p.isFeatured && p.isActive).slice(0, 6)
 }
 
 async function getSiteSettings() {

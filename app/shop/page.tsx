@@ -2,6 +2,7 @@ import { prisma } from '@/lib/db'
 import ProductCard from '@/components/shop/ProductCard'
 import ShopFilters from '@/components/shop/ShopFilters'
 import styles from './page.module.css'
+import { INITIAL_PRODUCTS } from '@/lib/products-data'
 import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
@@ -33,10 +34,22 @@ async function getProducts(searchParams: SearchParams) {
     else if (searchParams.sort === 'price-desc') orderBy.price = 'desc'
     else orderBy.createdAt = 'desc'
 
-    return await prisma.product.findMany({ where, orderBy })
-  } catch {
-    return []
+    const dbProducts = await prisma.product.findMany({ where, orderBy })
+    if (dbProducts.length > 0) return dbProducts
+  } catch {}
+
+  // Fallback to initial fine-art collection
+  let fallback = INITIAL_PRODUCTS.filter((p) => p.isActive)
+  if (searchParams.category && searchParams.category !== 'all') {
+    fallback = fallback.filter((p) => p.category === searchParams.category)
   }
+  if (searchParams.collection) {
+    fallback = fallback.filter((p) => p.collection === searchParams.collection)
+  }
+  if (searchParams.sort === 'price-asc') fallback.sort((a, b) => a.price - b.price)
+  else if (searchParams.sort === 'price-desc') fallback.sort((a, b) => b.price - a.price)
+
+  return fallback
 }
 
 export default async function ShopPage({

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { verifyAdminRequest } from '@/lib/admin-auth'
+import { INITIAL_PRODUCTS } from '@/lib/products-data'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,11 +14,14 @@ export async function GET(request: NextRequest) {
     const products = await prisma.product.findMany({
       orderBy: { createdAt: 'desc' },
     })
-    return NextResponse.json({ products })
+    if (products.length > 0) {
+      return NextResponse.json({ products })
+    }
   } catch (error) {
     console.error('Admin GET products error:', error)
-    return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 })
   }
+
+  return NextResponse.json({ products: INITIAL_PRODUCTS })
 }
 
 export async function POST(request: NextRequest) {
