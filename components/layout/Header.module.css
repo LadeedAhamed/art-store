@@ -48,12 +48,10 @@
 
 .brandTitle {
   font-family: var(--font-heading);
-  font-size: 1.875rem;
-  font-weight: 900;
-  font-style: italic;
+  font-size: 2.15rem;
+  font-weight: 400;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #1A1A1A;
+  color: var(--color-ink);
   text-decoration: none;
   text-align: center;
   white-space: nowrap;

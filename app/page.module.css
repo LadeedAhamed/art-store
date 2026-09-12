@@ -1,7 +1,7 @@
-/* ── 1. Hero Banner (welcome home) ────────── */
+/* ── 1. Hero Banner ───────────────────────── */
 .heroBanner {
   position: relative;
-  min-height: 480px;
+  min-height: 540px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.22);
+  background: rgba(26, 26, 26, 0.35);
 }
 
 .heroContent {
@@ -27,18 +27,27 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  padding: 3rem 1.5rem;
+  padding: 4rem 1.5rem;
+  max-width: 800px;
+}
+
+.heroSubtitle {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-sand);
+  margin: 0;
 }
 
 .heroTitle {
-  font-family: var(--font-body);
-  font-size: clamp(2.5rem, 6vw, 4.25rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.1;
   color: #FFFFFF;
   margin: 0;
-  text-transform: lowercase;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
 }
 
 .heroButtons {
@@ -47,57 +56,83 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
-.skyBtn {
+.primaryBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.875rem 2rem;
-  background: #50BDE4;
-  color: #FFFFFF;
-  border-radius: 4px;
-  font-size: 0.875rem;
+  padding: 0.95rem 2.25rem;
+  background: var(--color-brown);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
   font-weight: 600;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(80, 189, 228, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.25s var(--ease-out);
+  border: 1.5px solid transparent;
 }
 
-.skyBtn:hover {
-  background: #3BAFD8;
+.primaryBtn:hover {
+  background: var(--color-brown-dark);
   transform: translateY(-1px);
-  color: #FFFFFF;
+  color: var(--color-white);
+}
+
+.outlineBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 2.25rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.25s var(--ease-out);
+}
+
+.outlineBtn:hover {
+  background: #FFFFFF;
+  color: var(--color-ink);
+  transform: translateY(-1px);
 }
 
 /* ── Decorative Art Strip ──────────────────── */
 .artStrip {
-  background: #FFFFFF;
+  background: var(--color-white);
   border-bottom: 1px solid var(--color-border);
   overflow: hidden;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
 }
 
 .artStripInner {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 6px;
+  gap: 8px;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 0.5rem;
+  padding: 0 var(--gutter);
 }
 
 .stripThumb {
   position: relative;
   aspect-ratio: 1/1;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
 /* ── Sections ──────────────────────────────── */
 .section {
-  padding: 3.5rem 0 2rem;
+  padding: 4rem 0 2.5rem;
 }
 
 .collectorSection {
@@ -108,14 +143,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.75rem;
+  margin-bottom: 2rem;
 }
 
 .sectionTitle {
-  font-family: var(--font-body);
-  font-size: 1.875rem;
-  font-weight: 800;
-  color: #111111;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--color-ink);
   letter-spacing: -0.01em;
   margin: 0;
 }
@@ -126,18 +161,18 @@
   gap: 0.75rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #777777;
+  color: var(--color-ink-muted);
   user-select: none;
 }
 
 .arrowDisabled {
-  color: #CCCCCC;
+  color: var(--color-border-dark);
   font-size: 1.25rem;
   cursor: default;
 }
 
 .arrowActive {
-  color: #111111;
+  color: var(--color-ink);
   font-size: 1.25rem;
   cursor: pointer;
 }
@@ -151,14 +186,16 @@
 .productGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.75rem 1.25rem;
+  gap: 2rem 1.5rem;
 }
 
 /* ── 4. Commissions Banner ─────────────────── */
 .commissionsBanner {
-  background: #FDF4F0;
-  margin: 3.5rem 0;
-  padding: 3.5rem 0;
+  background: var(--color-sand);
+  margin: 4rem 0;
+  padding: 4rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .commissionsCard {
@@ -174,22 +211,23 @@
 .commissionsLeft {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .commissionsTitle {
-  font-family: var(--font-body);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  font-weight: 800;
-  color: #111111;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: var(--color-ink);
   line-height: 1.15;
   margin: 0;
 }
 
 .commissionsSub {
   font-size: 1.125rem;
-  color: #444444;
+  color: var(--color-ink-muted);
   margin: 0;
+  line-height: 1.6;
 }
 
 .commissionsBtn {
@@ -197,12 +235,12 @@
   align-items: center;
   justify-content: center;
   width: fit-content;
-  padding: 0.875rem 2rem;
-  background: #50BDE4;
-  color: #FFFFFF;
-  border-radius: 4px;
+  padding: 0.95rem 2.25rem;
+  background: var(--color-brown);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
   font-size: 0.8125rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
@@ -211,9 +249,9 @@
 }
 
 .commissionsBtn:hover {
-  background: #3BAFD8;
+  background: var(--color-brown-dark);
   transform: translateY(-1px);
-  color: #FFFFFF;
+  color: var(--color-white);
 }
 
 .commissionsRight {
@@ -225,15 +263,16 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16/10;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 /* ── Print Club ────────────────────────────── */
 .printClub {
-  background: var(--color-sky-light);
+  background: var(--color-cream);
   padding: var(--space-5xl) 0;
+  border-top: 1px solid var(--color-border);
 }
 
 .printClubInner {
@@ -277,7 +316,9 @@
 }
 
 .printClubTitle {
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
   margin-top: var(--space-sm);
 }
 
@@ -299,85 +340,6 @@
   color: var(--color-ink-muted);
 }
 
-/* ── About ─────────────────────────────────── */
-.about {
-  background: var(--color-sand);
-}
-
-.aboutInner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4xl);
-  align-items: center;
-}
-
-.aboutContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.dividerLeft {
-  width: 3rem;
-  height: 1.5px;
-  background: var(--color-brown);
-}
-
-.aboutText {
-  color: var(--color-ink-muted);
-  font-size: 1.0625rem;
-  line-height: 1.85;
-  max-width: 48ch;
-}
-
-.aboutImage {
-  position: relative;
-  aspect-ratio: 4/5;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-}
-
-/* ── Testimonials ──────────────────────────── */
-.testimonials {
-  background: var(--color-white);
-  padding: var(--space-4xl) 0;
-}
-
-.testimonialsTitle {
-  margin-bottom: var(--space-3xl);
-}
-
-.testimonialsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
-}
-
-.testimonial {
-  padding: var(--space-xl);
-  background: var(--color-cream);
-  border-radius: var(--radius-md);
-  border-left: 3px solid var(--color-brown);
-}
-
-.quote {
-  font-family: var(--font-heading);
-  font-size: 1.0625rem;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.7;
-  color: var(--color-ink);
-  margin-bottom: var(--space-md);
-}
-
-.author {
-  font-style: normal;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--color-ink-muted);
-}
-
 /* ── Newsletter ────────────────────────────── */
 .newsletter {
   background: var(--color-brown-dark);
@@ -391,7 +353,7 @@
 }
 
 .newsletterDesc {
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 1.0625rem;
   margin-bottom: var(--space-2xl);
   max-width: 48ch;
@@ -408,66 +370,47 @@
 
 .newsletterInput {
   flex: 1;
-  background: rgba(255,255,255,0.1) !important;
-  border-color: rgba(255,255,255,0.2) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
   color: var(--color-white) !important;
 }
 
 .newsletterInput::placeholder {
-  color: rgba(255,255,255,0.35) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
 }
 
 /* ── Responsive ────────────────────────────── */
 @media (max-width: 1024px) {
   .heroContent {
-    max-width: 500px;
-    padding: 2.5rem 2rem;
+    max-width: 600px;
+    padding: 3rem 2rem;
   }
   .productGrid { grid-template-columns: repeat(2, 1fr); }
   .printClubInner { gap: var(--space-2xl); }
-  .testimonialsGrid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .hero {
-    min-height: auto;
-    padding: 2rem 0;
-  }
-  .heroOverlay {
-    background: rgba(250, 247, 242, 0.6);
+  .heroBanner {
+    min-height: 440px;
   }
   .heroContent {
-    margin: 1.5rem var(--gutter);
-    padding: 2rem 1.5rem;
-    max-width: none;
-    width: auto;
+    padding: 3rem 1.5rem;
   }
-  .heroTitle {
-    font-size: clamp(1.875rem, 6vw, 2.5rem);
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1rem;
   }
-  .heroActions {
-    flex-direction: column;
-    width: 100%;
+  .commissionsCard {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
-  .heroActions a {
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-  }
-  .productGrid { grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
   .printClubInner { grid-template-columns: 1fr; }
   .printClubImages { height: 280px; order: 2; }
-  .aboutInner { grid-template-columns: 1fr; }
-  .aboutImage { order: -1; min-height: 280px; }
-  .testimonialsGrid { grid-template-columns: 1fr; }
   .sectionHeader { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .newsletterForm { flex-direction: column; }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 480px) {
   .productGrid { grid-template-columns: 1fr; }
-  .heroContent {
-    margin: 1rem var(--gutter);
-    padding: 1.75rem 1.25rem;
-  }
+  .artStripInner { grid-template-columns: repeat(3, 1fr); }
 }

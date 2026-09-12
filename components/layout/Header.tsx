@@ -53,8 +53,8 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({})
-  const [companyName, setCompanyName] = useState('MAURA K SPAIN')
-  const [announcement, setAnnouncement] = useState('200+ Mini Prints! Limited Time →')
+  const [companyName, setCompanyName] = useState('Elena Moore')
+  const [announcement, setAnnouncement] = useState('200+ Mini Prints Available — Free Worldwide Shipping on Orders Over $75')
   const { items, openCart } = useCartStore()
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
 
@@ -88,7 +88,7 @@ export default function Header() {
       </div>
 
       <header className={styles.header}>
-        {/* Tier 1: Search | Centered Logo | Currency & Actions */}
+        {/* Tier 1: Search | Centered Logo | Actions */}
         <div className={styles.mainRow}>
           <div className={styles.leftCol}>
             {/* Hamburger on Mobile */}
@@ -100,7 +100,7 @@ export default function Header() {
               <span /><span /><span />
             </button>
             <Link href="/shop" aria-label="Search" className={styles.iconBtn}>
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
             </Link>
@@ -114,7 +114,7 @@ export default function Header() {
           {/* Right Actions */}
           <div className={styles.rightCol}>
             <div className={styles.currencySelector}>
-              <span>United States | USD $</span>
+              <span>USD $</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m6 9 6 6 6-6"/></svg>
             </div>
             <Link href="/account" aria-label="Account" className={styles.iconBtn}>

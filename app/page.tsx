@@ -29,7 +29,7 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ── 1. Hero Banner (welcome home) ────────── */}
+      {/* ── 1. Hero Banner ────────────────────────── */}
       <section className={styles.heroBanner}>
         <div className={styles.heroMedia}>
           <Image
@@ -44,13 +44,14 @@ export default async function HomePage() {
         </div>
 
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>welcome home</h1>
+          <p className={styles.heroSubtitle}>Original Oil Paintings & Archival Prints</p>
+          <h1 className={styles.heroTitle}>Art for Lived-In Spaces</h1>
           <div className={styles.heroButtons}>
-            <Link href="/collections/originals" className={styles.skyBtn}>
-              Shop Original Paintings
+            <Link href="/collections/originals" className={styles.primaryBtn}>
+              Shop Originals
             </Link>
-            <Link href="/collections/prints" className={styles.skyBtn}>
-              Shop All Prints
+            <Link href="/collections/prints" className={styles.outlineBtn}>
+              Shop Fine Art Prints
             </Link>
           </div>
         </div>
@@ -116,10 +117,10 @@ export default async function HomePage() {
                 Looking for custom artwork?
               </h2>
               <p className={styles.commissionsSub}>
-                I'm currently taking commissions!
+                I'm currently taking commissions for custom still lifes, cocktails, and family dining memories.
               </p>
               <Link href="/contact?type=commission" className={styles.commissionsBtn}>
-                LET'S WORK TOGETHER
+                Work With Elena
               </Link>
             </div>
 
@@ -154,20 +155,20 @@ export default async function HomePage() {
               </div>
             </div>
             <div className={styles.printClubContent}>
-              <span className="badge badge--sky">Print Club</span>
+              <span className="badge badge--sand">Monthly Club</span>
               <h2 className={styles.printClubTitle}>
                 A New Print<br />Every Month
               </h2>
               <p className={styles.printClubDesc}>
-                Receive a hand-selected 8×10 archival giclée print each month — works never
-                available in the shop. Subscribers also get 15% off all purchases
+                Receive a hand-selected 8×10 archival giclée print each month — exclusive works never
+                available in the public shop. Subscribers also get 15% off all purchases
                 and early access to new originals.
               </p>
               <div className={styles.printClubPrice}>
                 <span className="price">$28</span>
                 <span className={styles.printClubPer}>/month</span>
               </div>
-              <Link href="/subscriptions" className="btn btn--sky btn--lg">
+              <Link href="/subscriptions" className="btn btn--primary btn--lg">
                 Join the Club
               </Link>
             </div>
@@ -197,4 +198,3 @@ export default async function HomePage() {
     </>
   )
 }
-
