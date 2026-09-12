@@ -1,0 +1,66 @@
+.toaster {
+  position: fixed;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  animation: slideInToast 300ms var(--ease-out);
+  max-width: 360px;
+  pointer-events: auto;
+}
+
+.success {
+  background: #1a3c2a;
+  color: #7eeaa6;
+}
+
+.error {
+  background: #3c1a1a;
+  color: #f08080;
+}
+
+.info {
+  background: var(--color-brown-dark);
+  color: var(--color-white);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.success .icon { color: #1a3c2a; background: #7eeaa6; }
+.error .icon { color: #3c1a1a; background: #f08080; }
+
+@keyframes slideInToast {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

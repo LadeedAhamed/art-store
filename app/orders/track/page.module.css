@@ -1,0 +1,311 @@
+.page {
+  min-height: 100vh;
+  background-color: #FAF8F5;
+  padding-bottom: 5rem;
+}
+
+.header {
+  padding: 4.5rem 1rem 3rem;
+  background: radial-gradient(circle at 50% 10%, #FFFFFF 0%, #F5EFE6 100%);
+  border-bottom: 1px solid #E8E4DC;
+}
+
+.title {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 600;
+  color: #24211D;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.subtitle {
+  color: #78716C;
+  font-size: 0.9375rem;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.searchCard {
+  background: #FFFFFF;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: -1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 24px rgba(75, 40, 11, 0.05);
+}
+
+.searchForm {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.input {
+  flex: 1;
+}
+
+.errorBanner {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.orderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.orderSummaryCard {
+  background: #FFFFFF;
+  border: 1px solid #E8E4DC;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+}
+
+.orderHeaderTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2.25rem;
+  gap: 1rem;
+}
+
+.orderIdText {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #24211D;
+}
+
+.orderDateText {
+  font-size: 0.8125rem;
+  color: #8C867A;
+  margin-top: 0.2rem;
+}
+
+/* 4-Step Stepper */
+.stepperWrap {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.stepperBar {
+  position: absolute;
+  top: 18px;
+  left: 5%;
+  right: 5%;
+  height: 4px;
+  background: #E8E4DC;
+  border-radius: 9999px;
+  z-index: 1;
+}
+
+.stepperFill {
+  height: 100%;
+  background: #4B280B;
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.stepNodes {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.stepNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 22%;
+}
+
+.nodeCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 2px solid #D8D2C6;
+  color: #8C867A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.stepCompleted .nodeCircle {
+  background: #4B280B;
+  border-color: #4B280B;
+  color: #FAF8F5;
+  box-shadow: 0 0 0 4px #F5EFE6;
+}
+
+.nodeLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #24211D;
+}
+
+.nodeSub {
+  font-size: 0.6875rem;
+  color: #8C867A;
+  margin-top: 0.15rem;
+}
+
+/* Carrier Tracking Callout Box */
+.carrierBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F5EFE6;
+  border: 1px solid #E0D5C3;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  gap: 1rem;
+}
+
+.carrierLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8B4A34;
+}
+
+.carrierNumber {
+  font-family: monospace;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #24211D;
+  margin-top: 0.2rem;
+}
+
+.awaitingBox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #FAF8F5;
+  border: 1px solid #E8E4DC;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+}
+
+.awaitingBox span {
+  font-size: 1.75rem;
+}
+
+/* Two Column Grid */
+.splitGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.cardPanel {
+  background: #FFFFFF;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  padding: 1.75rem;
+}
+
+.cardPanelTitle {
+  font-family: var(--font-heading), 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #24211D;
+  margin-bottom: 1rem;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #F0ECE4;
+}
+
+.itemTitle {
+  font-size: 0.875rem;
+  color: #24211D;
+  display: block;
+}
+
+.itemMeta {
+  font-size: 0.75rem;
+  color: #78716C;
+  margin-top: 0.15rem;
+}
+
+.itemPriceText {
+  font-size: 0.8125rem;
+  color: #57534E;
+  font-weight: 600;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 1px solid #E8E4DC;
+  font-size: 0.875rem;
+  color: #78716C;
+}
+
+.grandPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #4B280B;
+}
+
+.destText {
+  font-size: 0.875rem;
+  color: #57534E;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .searchForm {
+    flex-direction: column;
+  }
+  .splitGrid {
+    grid-template-columns: 1fr;
+  }
+  .carrierBox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .orderHeaderTop {
+    flex-direction: column;
+  }
+  .nodeLabel {
+    font-size: 0.6875rem;
+  }
+  .nodeSub {
+    display: none;
+  }
+}

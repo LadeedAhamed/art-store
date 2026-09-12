@@ -1,0 +1,187 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  password      String?
+  image         String?
+  role          String         @default("customer")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  orders        Order[]
+  subscriptions Subscription[]
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  title       String
+  description String
+  price       Float
+  images      String      // JSON array of image URLs
+  category    String      // "print" | "original" | "subscription"
+  collection  String?     // "food-drink" | "botanicals" | "seasonal" | etc.
+  sizes       String?     // JSON array e.g. ["8x10", "11x14", "5x7"]
+  stock       Int         @default(10)
+  isOriginal  Boolean     @default(false)
+  isFeatured  Boolean     @default(false)
+  isActive    Boolean     @default(true)
+  medium      String?     // "Oil on canvas"
+  dimensions  String?     // "8 x 10 inches"
+  year        Int?
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  userId          String?
+  guestEmail      String?
+  items           OrderItem[]
+  subtotal        Float
+  shipping        Float       @default(0)
+  total           Float
+  status          String      @default("pending") // pending | paid | shipped | delivered | cancelled
+  stripePaymentId String?
+  shippingAddress String?     // JSON
+  billingAddress  String?     // JSON
+  trackingNumber  String?
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  user            User?       @relation(fields: [userId], references: [id])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  title     String
+  price     Float
+  quantity  Int
+  size      String?
+  image     String?
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model Subscription {
+  id                String   @id @default(cuid())
+  userId            String
+  stripeSubId       String   @unique
+  stripeCustomerId  String
+  plan              String   // "monthly" | "annual"
+  status            String   @default("active") // active | cancelled | paused
+  nextBillingDate   DateTime?
+  cancelledAt       DateTime?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  type      String   @default("general") // general | commission | press
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model SiteSetting {
+  id               String   @id @default("default")
+
+  // Company & Brand Identity
+  companyName      String   @default("Elena Moore")
+  brandSubtitle    String   @default("Oil Paintings")
+  ownerName        String   @default("Elena Moore")
+  brandTagline     String   @default("Oil painter capturing quiet domestic moments through still life depictions of food and botanicals.")
+  copyrightText    String   @default("© 2026 Elena Moore Art. All rights reserved.")
+
+  // Contact & Atelier Location
+  contactEmail     String   @default("hello@elenamoore.art")
+  supportEmail     String   @default("orders@elenamoore.art")
+  studioPhone      String   @default("+1 (845) 555-0192")
+  studioLocation   String   @default("Kingston, New York")
+  studioAddress    String   @default("42 Atelier Way, Studio 3B, Kingston, NY 12401")
+  studioHours      String   @default("Monday–Friday, 9am–5pm EST • Replies within 2–3 business days")
+
+  // Social Channels
+  instagramUrl     String   @default("https://instagram.com")
+  pinterestUrl     String   @default("https://pinterest.com")
+  twitterUrl       String   @default("https://twitter.com")
+  facebookUrl      String   @default("https://facebook.com")
+  youtubeUrl       String   @default("https://youtube.com")
+
+  // Banner & Storefront Hero
+  topBarText       String   @default("Free standard domestic shipping on orders over $75 • Worldwide archival crating")
+  heroImage        String   @default("/hero.jpg")
+  heroLabel        String   @default("Original Oil Paintings & Prints")
+  heroTitle        String   @default("Fine Art for Timeless Interiors")
+  heroDesc         String   @default("Capturing light, texture, and quiet atmosphere on linen and canvas.")
+  marqueeText      String   @default("Free shipping over $75 • Archival-quality giclée prints • Signed originals • Collector Club memberships • Private commissions available")
+
+  // Policies & Notices
+  commissionNotice String   @default("I take on a limited number of private commissions each year. If you would like a bespoke original painting or custom dimensions, please reach out with details.")
+  wholesaleNotice  String   @default("I partner with select galleries, interior designers, and curated spaces for original works and archival prints.")
+
+  // About & Bio Story
+  aboutTagline     String   @default("I paint the interplay of light, atmosphere, and form — quiet moments captured on linen.")
+  aboutBio         String   @default("I am an oil painter working from my studio, exploring the meditative beauty of natural light, textured brushwork, and timeless compositions. Every original piece is rendered on fine Belgian linen with museum-grade pigments.")
+  exhibitions      String   @default("Hudson Valley Art Fair 2024 • Contemporary Oil Salon 2024 • Catskill Atelier Gallery 2023")
+  press            String   @default("Architectural Digest, Elle Decor, Studio International")
+
+  updatedAt        DateTime @updatedAt
+}
+
+

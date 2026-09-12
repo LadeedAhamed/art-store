@@ -1,0 +1,94 @@
+.viewerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mainStage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: #FAF8F5;
+  border: 1px solid #E8E4DC;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: crosshair;
+  box-shadow: 0 4px 20px rgba(75, 40, 11, 0.06);
+}
+
+.baseImage {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.mainStage.isZoomed .baseImage {
+  transform: scale(2.4);
+}
+
+.lensNotice {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid #D8D2C6;
+  border-radius: 9999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4B280B;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.originalTag {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(75, 40, 11, 0.9);
+  backdrop-filter: blur(6px);
+  color: #FAF8F5;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(212, 163, 89, 0.4);
+  pointer-events: none;
+}
+
+.thumbStrip {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.thumbBtn {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: #FAF8F5;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.thumbBtn:hover {
+  border-color: #8B4A34;
+}
+
+.thumbActive {
+  border-color: #4B280B;
+  box-shadow: 0 0 0 1px #4B280B;
+}

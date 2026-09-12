@@ -1,0 +1,220 @@
+.footer {
+  background: var(--color-brown-dark);
+  color: var(--color-white);
+  margin-top: auto;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-4xl);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-4xl) var(--gutter);
+}
+
+/* ── Brand ──────────────────────── */
+.brand {}
+
+.brandName {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--color-white);
+  text-decoration: none;
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.brandTagline {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  max-width: 30ch;
+  margin-bottom: var(--space-xl);
+}
+
+.social {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all var(--duration-fast);
+}
+
+.socialLink:hover {
+  color: var(--color-white);
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.1);
+}
+
+/* ── Links ──────────────────────── */
+.links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.linkGroupTitle {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-body);
+}
+
+.link {
+  font-size: 0.9375rem;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+  line-height: 1.8;
+}
+
+.link:hover {
+  color: var(--color-white);
+}
+
+/* ── Newsletter ─────────────────── */
+.newsletterText {
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.65;
+  margin-bottom: var(--space-md);
+}
+
+.newsletterForm {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.newsletterInput {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.08);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color var(--duration-fast);
+  min-width: 0;
+}
+
+.newsletterInput::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+.newsletterInput:focus {
+  border-color: rgba(255,255,255,0.5);
+}
+
+.newsletterBtn {
+  padding: 0.75rem 1.25rem;
+  background: rgba(255,255,255,0.15);
+  color: var(--color-white);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background var(--duration-fast);
+  white-space: nowrap;
+}
+
+.newsletterBtn:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ── Bottom Bar ─────────────────── */
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--gutter);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.8125rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.legalLinks {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.legalLink {
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color var(--duration-fast);
+}
+
+.legalLink:hover {
+  color: rgba(255,255,255,0.75);
+}
+
+.paymentIcons {
+  display: flex;
+  gap: var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.paymentIcons span {
+  padding: 3px 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── Responsive ─────────────────── */
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .links {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+
+  .legalLinks {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+}

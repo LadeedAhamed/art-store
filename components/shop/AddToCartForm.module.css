@@ -1,0 +1,141 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.fieldLabel {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+}
+
+.selectedNote {
+  color: var(--color-ink-muted);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ── Sizes ──────────────────────── */
+.sizeGroup {}
+
+.sizes {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.sizeBtn {
+  padding: 0.625rem 1.125rem;
+  border: 1.5px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  background: var(--color-white);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.sizeBtn:hover {
+  border-color: var(--color-brown);
+  color: var(--color-brown);
+}
+
+.sizeBtnActive {
+  border-color: var(--color-brown);
+  background: var(--color-brown);
+  color: var(--color-white);
+}
+
+/* ── Quantity ───────────────────── */
+.qtyGroup {}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.qtyBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 1.125rem;
+  color: var(--color-ink);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background var(--duration-fast);
+}
+
+.qtyBtn:hover {
+  background: var(--color-cream);
+}
+
+.qtyNum {
+  width: 44px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ── Price Display ──────────────── */
+.priceDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-cream);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.priceLabel {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Add Button ─────────────────── */
+.addBtn {
+  font-size: 0.875rem !important;
+}
+
+.checkIcon {
+  color: var(--color-white);
+  animation: scaleIn 200ms ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* ── Original Form ──────────────── */
+.originalForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.originalNote {
+  font-size: 0.9375rem;
+  color: var(--color-ink-muted);
+  line-height: 1.7;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-sand);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--color-terracotta);
+}

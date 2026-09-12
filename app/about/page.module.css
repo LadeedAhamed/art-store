@@ -1,0 +1,175 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 90svh;
+  padding-top: 0;
+}
+
+.heroImage {
+  position: relative;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-4xl) var(--space-4xl);
+  background: var(--color-sand);
+  gap: var(--space-lg);
+}
+
+.divider {
+  width: 3rem;
+  height: 2px;
+  background: var(--color-brown);
+}
+
+.heroTagline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  max-width: 34ch;
+}
+
+/* ── Bio ────────────────────────── */
+.bio {
+  background: var(--color-white);
+}
+
+.bioGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-4xl);
+  align-items: start;
+}
+
+.bioText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.bioText h2 {
+  margin-bottom: var(--space-md);
+}
+
+.bioText p {
+  font-size: 1.0625rem;
+  color: var(--color-ink-muted);
+  line-height: 1.85;
+}
+
+.bioSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: sticky;
+  top: 5.5rem;
+}
+
+.bioCard {
+  padding: var(--space-lg);
+  background: var(--color-cream);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.bioCard h3 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brown);
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-body);
+}
+
+.bioCard p {
+  font-size: 0.9375rem;
+  color: var(--color-ink-muted);
+  line-height: 1.65;
+}
+
+/* ── Process ────────────────────── */
+.process {
+  background: var(--color-brown-dark);
+  color: var(--color-white);
+}
+
+.process h2 {
+  color: var(--color-white);
+  margin-bottom: var(--space-3xl);
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-xl);
+}
+
+.processStep {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.stepNum {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.2);
+  line-height: 1;
+}
+
+.processStep h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-white);
+}
+
+.processStep p {
+  font-size: 0.9375rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.75;
+}
+
+/* ── CTA ────────────────────────── */
+.cta {
+  background: var(--color-sky-light);
+  padding: var(--space-5xl) 0;
+}
+
+.cta h2 {
+  margin-bottom: var(--space-md);
+}
+
+.cta p {
+  color: var(--color-ink-muted);
+  font-size: 1.0625rem;
+  margin-bottom: var(--space-2xl);
+}
+
+.ctaButtons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ─────────────────── */
+@media (max-width: 1024px) {
+  .processGrid { grid-template-columns: repeat(2, 1fr); }
+  .bioGrid { grid-template-columns: 1fr; }
+  .bioSidebar { position: static; display: grid; grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .heroImage { min-height: 50svh; }
+  .heroContent { padding: var(--space-2xl); }
+  .processGrid { grid-template-columns: 1fr; }
+  .bioSidebar { grid-template-columns: 1fr; }
+}

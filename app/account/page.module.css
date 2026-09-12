@@ -1,0 +1,205 @@
+.page {
+  padding-top: 0;
+  min-height: 100svh;
+}
+
+.header {
+  background: var(--color-sand);
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.title {
+  margin: 0.75rem 0;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+.subtitle {
+  color: var(--color-ink-muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.lookupCard {
+  background: #FFF;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.cardTitle {
+  font-size: 1.375rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardDesc {
+  color: var(--color-ink-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 1.5rem;
+}
+
+.form {
+  display: flex;
+  gap: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .form {
+    flex-direction: column;
+  }
+}
+
+.input {
+  flex: 1;
+}
+
+.results {
+  margin-bottom: 3rem;
+}
+
+.resultsTitle {
+  font-size: 1.125rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-ink);
+}
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.orderCard {
+  background: #FFF;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: var(--color-sand);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.orderId {
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  margin: 0 0 0.25rem;
+}
+
+.orderDate {
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.orderItems {
+  padding: 1.25rem 1.5rem;
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-sand);
+}
+
+.itemRow:last-child {
+  border-bottom: none;
+}
+
+.itemTitle {
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.itemSize {
+  margin-left: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+}
+
+.itemMeta {
+  font-size: 0.875rem;
+  color: var(--color-ink-muted);
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #FAFAFA;
+  border-top: 1px solid var(--color-border);
+}
+
+.shippingNotice {
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+}
+
+.orderTotal {
+  font-size: 1rem;
+}
+
+.noOrders {
+  background: var(--color-sand);
+  padding: 2.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.clubCard {
+  background: var(--color-sand);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 650px) {
+  .clubCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.clubInfo h3 {
+  margin: 0.5rem 0;
+}
+
+.clubInfo p {
+  color: var(--color-ink-muted);
+  margin: 0;
+  font-size: 0.9375rem;
+  max-width: 480px;
+}
+
+.supportCard {
+  background: #FFF;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.supportCard h3 {
+  margin-bottom: 0.5rem;
+}
+
+.supportCard p {
+  color: var(--color-ink-muted);
+  max-width: 480px;
+  margin: 0 auto 1.5rem;
+}

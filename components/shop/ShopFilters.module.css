@@ -1,0 +1,86 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.groupTitle {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-body);
+}
+
+.filterLink {
+  display: flex;
+  align-items: center;
+  padding: 0.5625rem var(--space-md);
+  font-size: 0.9375rem;
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast);
+  border: 1.5px solid transparent;
+}
+
+.filterLink:hover {
+  color: var(--color-ink);
+  background: var(--color-cream);
+}
+
+.filterLink.active {
+  color: var(--color-brown);
+  background: rgba(111, 47, 31, 0.06);
+  border-color: rgba(111, 47, 31, 0.2);
+  font-weight: 500;
+}
+
+.clearBtn {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast);
+  padding: var(--space-sm) 0;
+}
+
+.clearBtn:hover {
+  color: var(--color-brown);
+}
+
+@media (max-width: 1024px) {
+  .filters {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.375rem;
+  }
+  .groupTitle {
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+  .filterLink {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8125rem;
+    border-radius: 999px;
+    background: var(--color-sand);
+  }
+}
