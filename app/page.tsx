@@ -2,134 +2,146 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import ProductCard from '@/components/shop/ProductCard'
+import GiftCardSection from '@/components/shop/GiftCardSection'
 import NewsletterForm from '@/components/ui/NewsletterForm'
 import { INITIAL_PRODUCTS } from '@/lib/products-data'
 import styles from './page.module.css'
 
 export const dynamic = 'force-dynamic'
 
-async function getFeaturedProducts() {
+async function getAllCatalogProducts() {
   try {
-    const dbFeatured = await prisma.product.findMany({
-      where: { isFeatured: true, isActive: true },
-      take: 6,
+    const dbProducts = await prisma.product.findMany({
+      where: { isActive: true },
       orderBy: { createdAt: 'desc' },
     })
-    if (dbFeatured.length > 0) return dbFeatured
+    if (dbProducts.length > 0) return dbProducts
   } catch {}
 
-  return INITIAL_PRODUCTS.filter((p) => p.isFeatured && p.isActive).slice(0, 6)
-}
-
-async function getSiteSettings() {
-  try {
-    return await prisma.siteSetting.findUnique({ where: { id: 'default' } })
-  } catch {
-    return null
-  }
+  return INITIAL_PRODUCTS.filter((p) => p.isActive)
 }
 
 export default async function HomePage() {
-  const [featured, settings] = await Promise.all([
-    getFeaturedProducts(),
-    getSiteSettings(),
-  ])
+  const products = await getAllCatalogProducts()
 
-  const heroImage = settings?.heroImage || '/hero.jpg'
-  const heroLabel = settings?.heroLabel || 'Original Oil Paintings & Prints'
-  const heroTitle = settings?.heroTitle || 'Fine Art for Timeless Interiors'
-  const heroDesc = settings?.heroDesc || 'Capturing light, texture, and quiet atmosphere on linen and canvas.'
-  const aboutBio = settings?.aboutBio || "I am an oil painter working from my studio, exploring the meditative beauty of natural light, textured brushwork, and timeless compositions. Every original piece is rendered on fine Belgian linen with museum-grade pigments."
-  const marqueeItems = settings?.marqueeText
-    ? settings.marqueeText.split('•').map((s) => s.trim()).filter(Boolean)
-    : [
-        'Free shipping over $75',
-        'Archival-quality giclée prints',
-        'Signed originals',
-        'Collector Club memberships',
-        'Private commissions available',
-      ]
+  const prints = products.filter((p) => !p.isOriginal)
+  const originals = products.filter((p) => p.isOriginal)
 
   return (
     <>
-      {/* ── Hero ────────────────────────────────── */}
-      <section className={styles.hero}>
+      {/* ── 1. Hero Banner (welcome home) ────────── */}
+      <section className={styles.heroBanner}>
         <div className={styles.heroMedia}>
           <Image
-            src={heroImage}
-            alt={heroTitle}
+            src="/hero.jpg"
+            alt="Original Oil Painting"
             fill
             priority
-            style={{ objectFit: 'cover', objectPosition: 'center 35%' }}
+            style={{ objectFit: 'cover', objectPosition: 'center 40%' }}
             sizes="100vw"
           />
           <div className={styles.heroOverlay} />
         </div>
+
         <div className={styles.heroContent}>
-          <p className={styles.heroLabel}>
-            {heroLabel}
-          </p>
-          <h1 className={styles.heroTitle}>
-            {heroTitle}
-          </h1>
-          <p className={styles.heroDesc}>
-            {heroDesc}
-          </p>
-          <div className={styles.heroActions}>
-            <Link href="/shop" className="btn btn--primary btn--lg">
-              Shop Prints & Originals
+          <h1 className={styles.heroTitle}>welcome home</h1>
+          <div className={styles.heroButtons}>
+            <Link href="/collections/originals" className={styles.skyBtn}>
+              Shop Original Paintings
             </Link>
-            <Link href="/subscriptions" className={`btn btn--lg ${styles.heroSecondaryBtn}`}>
-              Join Print Club
+            <Link href="/collections/prints" className={styles.skyBtn}>
+              Shop All Prints
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Marquee Banner ──────────────────────── */}
-      <div className={styles.marquee}>
-        <div className={styles.marqueeTrack}>
-          {Array(4).fill(marqueeItems).flat().map((text, i) => (
-            <span key={i} className={styles.marqueeItem}>{text} <span className={styles.marqueeDot}>◆</span></span>
+      {/* Mini prints decorative strip */}
+      <div className={styles.artStrip}>
+        <div className={styles.artStripInner}>
+          {['/aperol.jpg', '/berries.jpg', '/hero.jpg', '/aperol.jpg', '/berries.jpg', '/hero.jpg'].map((img, i) => (
+            <div key={i} className={styles.stripThumb}>
+              <Image src={img} alt="Mini art print" fill style={{ objectFit: 'cover' }} sizes="150px" />
+            </div>
           ))}
         </div>
       </div>
 
-      {/* ── Featured Works ───────────────────────── */}
-      <section className="section">
+      {/* ── 2. Bestselling Prints ────────────────── */}
+      <section className={styles.section}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <div>
-              <p className="label">New Work</p>
-              <h2>Featured Pieces</h2>
+            <h2 className={styles.sectionTitle}>Bestselling Prints</h2>
+            <div className={styles.carouselNav}>
+              <span className={styles.arrowDisabled}>‹</span>
+              <span className={styles.pageCount}>1/8</span>
+              <span className={styles.arrowActive}>›</span>
             </div>
-            <Link href="/shop" className="btn btn--ghost">
-              View All →
-            </Link>
           </div>
 
           <div className={styles.productGrid}>
-            {featured.length > 0 ? (
-              featured.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))
-            ) : (
-              // Placeholder cards when DB not seeded
-              [1,2,3,4,5,6].map((i) => (
-                <div key={i} className={styles.skeletonCard}>
-                  <div className={`skeleton ${styles.skeletonImg}`} />
-                  <div className={styles.skeletonBody}>
-                    <div className={`skeleton ${styles.skeletonTitle}`} />
-                    <div className={`skeleton ${styles.skeletonPrice}`} />
-                  </div>
-                </div>
-              ))
-            )}
+            {prints.slice(0, 4).map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── Print Club Promo ─────────────────────── */}
+      {/* ── 3. Become a Collector (Originals) ────── */}
+      <section className={`${styles.section} ${styles.collectorSection}`}>
+        <div className="container">
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Become a Collector</h2>
+            <div className={styles.carouselNav}>
+              <span className={styles.arrowDisabled}>‹</span>
+              <span className={styles.pageCount}>1/8</span>
+              <span className={styles.arrowActive}>›</span>
+            </div>
+          </div>
+
+          <div className={styles.productGrid}>
+            {originals.slice(0, 4).map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 4. Custom Artwork Commissions ─────────── */}
+      <section className={styles.commissionsBanner}>
+        <div className="container">
+          <div className={styles.commissionsCard}>
+            <div className={styles.commissionsLeft}>
+              <h2 className={styles.commissionsTitle}>
+                Looking for custom artwork?
+              </h2>
+              <p className={styles.commissionsSub}>
+                I'm currently taking commissions!
+              </p>
+              <Link href="/contact?type=commission" className={styles.commissionsBtn}>
+                LET'S WORK TOGETHER
+              </Link>
+            </div>
+
+            <div className={styles.commissionsRight}>
+              <div className={styles.commissionsImage}>
+                <Image
+                  src="/hero.jpg"
+                  alt="Custom commission oil painting"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5. Consider a Gift Card! ──────────────── */}
+      <GiftCardSection />
+
+      {/* ── 6. Print Club Monthly Subscription ─────── */}
       <section className={styles.printClub}>
         <div className="container">
           <div className={styles.printClubInner}>
@@ -147,7 +159,7 @@ export default async function HomePage() {
                 A New Print<br />Every Month
               </h2>
               <p className={styles.printClubDesc}>
-                Receive a hand-selected 8×10 giclée print each month — works never
+                Receive a hand-selected 8×10 archival giclée print each month — works never
                 available in the shop. Subscribers also get 15% off all purchases
                 and early access to new originals.
               </p>
@@ -163,67 +175,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── About Teaser ─────────────────────────── */}
-      <section className={`section ${styles.about}`}>
-        <div className="container">
-          <div className={styles.aboutInner}>
-            <div className={styles.aboutContent}>
-              <p className="label">About the Artist</p>
-              <h2>Elena Moore</h2>
-              <div className={styles.dividerLeft} />
-              <p className={styles.aboutText}>
-                {aboutBio}
-              </p>
-              <p className={styles.aboutText}>
-                Each painting is an invitation to slow down and find joy in the small,
-                beautiful things.
-              </p>
-              <Link href="/about" className="btn btn--secondary">
-                Read More
-              </Link>
-            </div>
-            <div className={styles.aboutImage}>
-              <Image
-                src="/hero.jpg"
-                alt="Elena Moore in her studio"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 45vw"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Testimonials ─────────────────────────── */}
-      <section className={`section--sm ${styles.testimonials}`}>
-        <div className="container container--narrow">
-          <h2 className={`${styles.testimonialsTitle} text-center`}>What Collectors Say</h2>
-          <div className={styles.testimonialsGrid}>
-            {[
-              {
-                quote: "The original landscape painting arrived in pristine museum packaging. The depth of texture and light in person is breathtaking — the centerpiece of our living room.",
-                author: "Sarah M., New York",
-              },
-              {
-                quote: "My Collector Print Club subscription is the highlight of each season. The 310gsm archival paper and rich pigments look indistinguishable from original canvas studies.",
-                author: "James T., London",
-              },
-              {
-                quote: "Elena's original oil paintings are true museum quality. The way she renders natural light across Belgian linen brings such a tranquil, elevated presence to our space.",
-                author: "Priya K., Chicago",
-              },
-            ].map((t, i) => (
-              <blockquote key={i} className={styles.testimonial}>
-                <p className={styles.quote}>"{t.quote}"</p>
-                <cite className={styles.author}>— {t.author}</cite>
-              </blockquote>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Newsletter ───────────────────────────── */}
+      {/* ── 7. Newsletter (From the Studio) ──────── */}
       <section className={styles.newsletter}>
         <div className="container container--narrow">
           <p className="label" style={{ textAlign: 'center' }}>Stay Connected</p>
@@ -231,7 +183,7 @@ export default async function HomePage() {
             From the Studio
           </h2>
           <p className={`${styles.newsletterDesc} text-center`}>
-            Get first access to new works, behind-the-scenes process, and
+            Get first access to new original drops, behind-the-scenes process, and
             subscriber-only prints. No spam, ever.
           </p>
           <NewsletterForm
@@ -245,3 +197,4 @@ export default async function HomePage() {
     </>
   )
 }
+

@@ -1,11 +1,12 @@
-/* ── Hero ──────────────────────────────────── */
-.hero {
+/* ── 1. Hero Banner (welcome home) ────────── */
+.heroBanner {
   position: relative;
-  min-height: calc(90svh - 80px);
+  min-height: 480px;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background: var(--color-sand);
+  text-align: center;
 }
 
 .heroMedia {
@@ -16,167 +17,216 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(250, 247, 242, 0.8) 0%,
-    rgba(250, 247, 242, 0.45) 45%,
-    rgba(0, 0, 0, 0.05) 100%
-  );
-  pointer-events: none;
+  background: rgba(0, 0, 0, 0.22);
 }
 
 .heroContent {
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(232, 228, 220, 0.95);
-  border-radius: 12px;
-  padding: 3rem 3.25rem;
-  max-width: 580px;
-  margin: 3rem 0 3rem var(--gutter);
-  box-shadow: 0 16px 48px rgba(28, 25, 23, 0.08);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
-}
-
-.heroLabel {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-terracotta);
+  align-items: center;
+  gap: 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 .heroTitle {
-  font-family: var(--font-heading);
-  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-  font-weight: 500;
-  line-height: 1.12;
-  color: var(--color-ink);
-  letter-spacing: -0.01em;
+  font-family: var(--font-body);
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
   margin: 0;
+  text-transform: lowercase;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
-.heroTitle em {
-  font-style: italic;
-  color: var(--color-terracotta);
-  font-weight: 400;
-}
-
-.heroDesc {
-  font-size: 1.0625rem;
-  color: var(--color-ink-muted);
-  max-width: 44ch;
-  line-height: 1.6;
-  margin: 0.25rem 0 0.5rem;
-}
-
-.heroActions {
+.heroButtons {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
-.heroSecondaryBtn {
-  background: #FFFFFF;
-  color: var(--color-ink);
-  border: 1.5px solid var(--color-border);
-  font-weight: 600;
-  transition: all var(--transition-fast);
-}
-
-.heroSecondaryBtn:hover {
-  background: var(--color-sand);
-  border-color: var(--color-ink);
-  color: var(--color-ink);
-  transform: translateY(-1px);
-}
-
-/* ── Marquee ───────────────────────────────── */
-.marquee {
-  background: var(--color-brown);
-  color: rgba(255,255,255,0.9);
-  overflow: hidden;
-  padding: 0.875rem 0;
-}
-
-.marqueeTrack {
-  display: flex;
-  white-space: nowrap;
-  animation: marquee 30s linear infinite;
-}
-
-.marqueeItem {
+.skyBtn {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-lg);
-  padding-right: var(--space-lg);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background: #50BDE4;
+  color: #FFFFFF;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(80, 189, 228, 0.35);
 }
 
-.marqueeDot {
-  color: rgba(255,255,255,0.4);
-  font-size: 0.5rem;
+.skyBtn:hover {
+  background: #3BAFD8;
+  transform: translateY(-1px);
+  color: #FFFFFF;
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* ── Decorative Art Strip ──────────────────── */
+.artStrip {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+  padding: 0.5rem 0;
 }
 
-/* ── Section Header ────────────────────────── */
+.artStripInner {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+.stripThumb {
+  position: relative;
+  aspect-ratio: 1/1;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+/* ── Sections ──────────────────────────────── */
+.section {
+  padding: 3.5rem 0 2rem;
+}
+
+.collectorSection {
+  padding-top: 1.5rem;
+}
+
 .sectionHeader {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--space-2xl);
-  gap: var(--space-md);
+  margin-bottom: 1.75rem;
 }
 
-.sectionHeader h2 {
-  margin-top: var(--space-xs);
+.sectionTitle {
+  font-family: var(--font-body);
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: -0.01em;
+  margin: 0;
 }
 
-/* ── Product Grid ──────────────────────────── */
+.carouselNav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #777777;
+  user-select: none;
+}
+
+.arrowDisabled {
+  color: #CCCCCC;
+  font-size: 1.25rem;
+  cursor: default;
+}
+
+.arrowActive {
+  color: #111111;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.pageCount {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* ── 4-Column Product Grid ─────────────────── */
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl) var(--space-lg);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem 1.25rem;
 }
 
-/* ── Skeleton Cards ────────────────────────── */
-.skeletonCard {
+/* ── 4. Commissions Banner ─────────────────── */
+.commissionsBanner {
+  background: #FDF4F0;
+  margin: 3.5rem 0;
+  padding: 3.5rem 0;
+}
+
+.commissionsCard {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.commissionsLeft {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: 1rem;
 }
 
-.skeletonImg {
+.commissionsTitle {
+  font-family: var(--font-body);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: #111111;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.commissionsSub {
+  font-size: 1.125rem;
+  color: #444444;
+  margin: 0;
+}
+
+.commissionsBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.875rem 2rem;
+  background: #50BDE4;
+  color: #FFFFFF;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.commissionsBtn:hover {
+  background: #3BAFD8;
+  transform: translateY(-1px);
+  color: #FFFFFF;
+}
+
+.commissionsRight {
+  display: flex;
+  justify-content: center;
+}
+
+.commissionsImage {
+  position: relative;
   width: 100%;
-  aspect-ratio: 3/4;
-}
-
-.skeletonBody {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  padding: var(--space-sm) 0;
-}
-
-.skeletonTitle {
-  height: 1rem;
-  width: 70%;
-}
-
-.skeletonPrice {
-  height: 1rem;
-  width: 40%;
+  aspect-ratio: 16/10;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* ── Print Club ────────────────────────────── */

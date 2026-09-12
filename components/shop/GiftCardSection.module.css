@@ -1,0 +1,153 @@
+.section {
+  background-color: #E2F2F9;
+  padding: 4.5rem 1.5rem;
+  margin: 3rem 0;
+}
+
+.container {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #111111;
+  margin-bottom: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 2rem;
+}
+
+.form {
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.8125rem;
+  color: #555555;
+  font-weight: 400;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.select {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  background: #FFFFFF;
+  border: 1.5px solid #1A1A1A;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  color: #1A1A1A;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23111111' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid #1A1A1A;
+  border-radius: 4px;
+  background: #FFFFFF;
+  width: fit-content;
+}
+
+.stepBtn {
+  background: none;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1A1A1A;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.stepBtn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.stepValue {
+  padding: 0 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #1A1A1A;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: #333333;
+  cursor: pointer;
+  margin-top: 0.25rem;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #50BDE4;
+  cursor: pointer;
+}
+
+.addBtn {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: #50BDE4;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.addBtn:hover {
+  background: #3BAFD8;
+  transform: translateY(-1px);
+}
+
+.viewDetails {
+  display: block;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #666666;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  transition: color 0.15s ease;
+}
+
+.viewDetails:hover {
+  color: #1A1A1A;
+  text-decoration: underline;
+}

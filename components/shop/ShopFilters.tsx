@@ -13,14 +13,19 @@ interface Props {
 
 const categories = [
   { value: 'all', label: 'All Products' },
-  { value: 'print', label: 'Prints' },
-  { value: 'original', label: 'Originals' },
+  { value: 'print', label: 'Fine Art Prints' },
+  { value: 'original', label: 'Original Paintings' },
+  { value: 'sticker', label: 'Stickers' },
+  { value: 'homeware', label: 'Apparel & Homewares' },
 ]
 
 const collections = [
-  { value: 'food-drink', label: 'Food & Drink Still Life' },
-  { value: 'still-life', label: 'Still Life & Form' },
+  { value: 'mini-prints', label: '200+ Mini Prints' },
+  { value: 'food-drink', label: 'Cocktails & Food' },
+  { value: 'still-life', label: 'Still Life & Fruit' },
   { value: 'botanicals', label: 'Botanicals & Flora' },
+  { value: 'stickers', label: 'Vinyl Stickers' },
+  { value: 'homewares', label: 'Apparel & Homewares' },
 ]
 
 export default function ShopFilters({ currentParams }: Props) {
@@ -40,7 +45,7 @@ export default function ShopFilters({ currentParams }: Props) {
   return (
     <div className={styles.filters}>
       <div className={styles.group}>
-        <h3 className={styles.groupTitle}>Category</h3>
+        <h3 className={styles.groupTitle}>Categories</h3>
         {categories.map((cat) => (
           <Link
             key={cat.value}
@@ -53,7 +58,7 @@ export default function ShopFilters({ currentParams }: Props) {
       </div>
 
       <div className={styles.group}>
-        <h3 className={styles.groupTitle}>Collection</h3>
+        <h3 className={styles.groupTitle}>Collections</h3>
         {collections.map((col) => (
           <Link
             key={col.value}

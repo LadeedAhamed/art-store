@@ -6,23 +6,55 @@ import { usePathname } from 'next/navigation'
 import { useCartStore } from '@/lib/cart-store'
 import styles from './Header.module.css'
 
-const navLinks = [
-  { href: '/shop', label: 'Shop' },
+interface SubItem {
+  label: string
+  href: string
+}
+
+interface NavItem {
+  label: string
+  href: string
+  dropdown?: SubItem[]
+}
+
+const navItems: NavItem[] = [
+  { href: '/shop?collection=mini-prints', label: '200+ Mini Prints' },
+  { href: '/', label: 'Home' },
   { href: '/collections/originals', label: 'Originals' },
-  { href: '/collections/prints', label: 'Prints' },
-  { href: '/subscriptions', label: 'Print Club' },
+  { href: '/shop?collection=stickers', label: 'Stickers' },
+  {
+    href: '/collections/prints',
+    label: 'Prints',
+    dropdown: [
+      { label: 'All Prints', href: '/collections/prints' },
+      { label: 'Cocktails & Drinks', href: '/collections/cocktails' },
+      { label: 'Food & Dining Still Life', href: '/collections/food-drink' },
+      { label: 'Fruit & Still Life', href: '/collections/still-life' },
+      { label: 'Botanicals & Flora', href: '/collections/botanicals' },
+      { label: '200+ Mini Prints', href: '/shop?collection=mini-prints' },
+    ],
+  },
+  { href: '/contact?type=commission', label: 'Commissions' },
+  {
+    href: '/subscriptions',
+    label: 'Print Club',
+    dropdown: [
+      { label: 'About Print Club', href: '/subscriptions' },
+      { label: 'Join Monthly Subscription ($28/mo)', href: '/subscriptions' },
+      { label: 'Past Print Club Releases', href: '/shop?collection=print-club' },
+    ],
+  },
+  { href: '/shop?collection=homewares', label: 'Apparel & Homewares' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Header() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [companyName, setCompanyName] = useState('Elena Moore')
-  const [brandSubtitle, setBrandSubtitle] = useState('Oil Paintings')
-  const [announcement, setAnnouncement] = useState(
-    'Free standard domestic shipping on orders over $75 • Worldwide archival crating'
-  )
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({})
+  const [companyName, setCompanyName] = useState('MAURA K SPAIN')
+  const [announcement, setAnnouncement] = useState('200+ Mini Prints! Limited Time →')
   const { items, openCart } = useCartStore()
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
 
@@ -37,54 +69,56 @@ export default function Header() {
         if (data?.settings) {
           if (data.settings.topBarText) setAnnouncement(data.settings.topBarText)
           if (data.settings.companyName) setCompanyName(data.settings.companyName)
-          if (data.settings.brandSubtitle) setBrandSubtitle(data.settings.brandSubtitle)
         }
       })
       .catch(() => {})
   }, [])
 
+  const toggleMobileSub = (label: string) => {
+    setMobileExpanded((prev) => ({ ...prev, [label]: !prev[label] }))
+  }
+
   return (
     <>
       {/* Top Utility Banner */}
       <div className={styles.topBar}>
-        <span>{announcement}</span>
+        <Link href="/shop?collection=mini-prints" className={styles.topBarLink}>
+          {announcement}
+        </Link>
       </div>
 
       <header className={styles.header}>
-        <div className={styles.inner}>
-          {/* Hamburger */}
-          <button
-            className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
-            aria-label="Toggle menu"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <span /><span /><span />
-          </button>
-
-          {/* Logo */}
-          <Link href="/" className={styles.logo}>
-            <span className={styles.logoName}>{companyName}</span>
-            <span className={styles.logoSub}>{brandSubtitle}</span>
-          </Link>
-
-          {/* Desktop Nav */}
-          <nav className={styles.nav} aria-label="Main navigation">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className={styles.navLink}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Actions */}
-          <div className={styles.actions}>
+        {/* Tier 1: Search | Centered Logo | Currency & Actions */}
+        <div className={styles.mainRow}>
+          <div className={styles.leftCol}>
+            {/* Hamburger on Mobile */}
+            <button
+              className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
+              aria-label="Toggle menu"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <span /><span /><span />
+            </button>
             <Link href="/shop" aria-label="Search" className={styles.iconBtn}>
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
             </Link>
+          </div>
+
+          {/* Centered Brand Title */}
+          <Link href="/" className={styles.brandTitle}>
+            {companyName}
+          </Link>
+
+          {/* Right Actions */}
+          <div className={styles.rightCol}>
+            <div className={styles.currencySelector}>
+              <span>United States | USD $</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
             <Link href="/account" aria-label="Account" className={styles.iconBtn}>
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
             </Link>
@@ -93,7 +127,7 @@ export default function Header() {
               className={styles.cartBtn}
               onClick={openCart}
             >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.75" viewBox="0 0 24 24">
+              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 0 1-8 0"/>
@@ -103,27 +137,124 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Tier 2: Centered Sub-Navigation */}
+        <nav className={styles.subNav} aria-label="Main navigation">
+          {navItems.map((item) => {
+            const isHome = item.href === '/'
+            const isBaseActive = isHome
+              ? pathname === '/'
+              : pathname === item.href || pathname?.startsWith(item.href.split('?')[0])
+            const hasDropdown = !!item.dropdown
+
+            return (
+              <div
+                key={item.label}
+                className={styles.navItemWrapper}
+                onMouseEnter={() => hasDropdown && setActiveDropdown(item.label)}
+                onMouseLeave={() => hasDropdown && setActiveDropdown(null)}
+              >
+                <Link
+                  href={item.href}
+                  className={`${styles.navLink} ${isBaseActive ? styles.navLinkActive : ''}`}
+                >
+                  <span>{item.label}</span>
+                  {hasDropdown && (
+                    <svg className={styles.chevronIcon} width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  )}
+                </Link>
+
+                {/* Dropdown Menu */}
+                {hasDropdown && activeDropdown === item.label && (
+                  <div className={styles.dropdownMenu}>
+                    {item.dropdown!.map((sub) => (
+                      <Link
+                        key={sub.label}
+                        href={sub.href}
+                        className={styles.dropdownLink}
+                        onClick={() => setActiveDropdown(null)}
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </nav>
+
+        {/* Mobile Drawer Menu */}
         <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
           <nav>
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={styles.mobileNavLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const hasDropdown = !!item.dropdown
+              const isExpanded = mobileExpanded[item.label]
+
+              return (
+                <div key={item.label} className={styles.mobileNavItem}>
+                  <div className={styles.mobileLinkRow}>
+                    <Link
+                      href={item.href}
+                      className={styles.mobileNavLink}
+                      onClick={() => !hasDropdown && setMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                    {hasDropdown && (
+                      <button
+                        className={styles.mobileSubToggle}
+                        onClick={() => toggleMobileSub(item.label)}
+                        aria-label="Toggle sub-menu"
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          style={{ transform: isExpanded ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}
+                        >
+                          <path d="m6 9 6 6 6-6" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+
+                  {hasDropdown && isExpanded && (
+                    <div className={styles.mobileSubList}>
+                      {item.dropdown!.map((sub) => (
+                        <Link
+                          key={sub.label}
+                          href={sub.href}
+                          className={styles.mobileSubLink}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
           </nav>
           <div className={styles.mobileMenuFooter}>
             <Link href="/account" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
               Account
             </Link>
-            <Link href="/cart" className={styles.mobileNavLink} onClick={() => setMenuOpen(false)}>
+            <button
+              className={styles.mobileNavLink}
+              style={{ background: 'none', border: 'none', textAlign: 'left', width: '100%', cursor: 'pointer' }}
+              onClick={() => {
+                setMenuOpen(false)
+                openCart()
+              }}
+            >
               Cart {itemCount > 0 && `(${itemCount})`}
-            </Link>
+            </button>
           </div>
         </div>
 
