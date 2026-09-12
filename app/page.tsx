@@ -34,7 +34,7 @@ export default async function HomePage() {
         <div className={styles.heroMedia}>
           <Image
             src="/hero.jpg"
-            alt="Original Oil Painting"
+            alt="Elena Moore Original Oil Painting"
             fill
             priority
             style={{ objectFit: 'cover', objectPosition: 'center 40%' }}
@@ -57,27 +57,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Mini prints decorative strip */}
-      <div className={styles.artStrip}>
-        <div className={styles.artStripInner}>
-          {['/aperol.jpg', '/berries.jpg', '/hero.jpg', '/aperol.jpg', '/berries.jpg', '/hero.jpg'].map((img, i) => (
-            <div key={i} className={styles.stripThumb}>
-              <Image src={img} alt="Mini art print" fill style={{ objectFit: 'cover' }} sizes="150px" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── 2. Bestselling Prints ────────────────── */}
+      {/* ── 2. Bestselling Fine Art Prints ─────────── */}
       <section className={styles.section}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Bestselling Prints</h2>
-            <div className={styles.carouselNav}>
-              <span className={styles.arrowDisabled}>‹</span>
-              <span className={styles.pageCount}>1/8</span>
-              <span className={styles.arrowActive}>›</span>
+            <div>
+              <p className="label">Archival Reproductions</p>
+              <h2 className={styles.sectionTitle}>Bestselling Prints</h2>
             </div>
+            <Link href="/collections/prints" className="btn btn--outline btn--sm">
+              View All Prints →
+            </Link>
           </div>
 
           <div className={styles.productGrid}>
@@ -88,16 +78,17 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 3. Become a Collector (Originals) ────── */}
+      {/* ── 3. Original Oil Paintings ─────────────── */}
       <section className={`${styles.section} ${styles.collectorSection}`}>
         <div className="container">
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Become a Collector</h2>
-            <div className={styles.carouselNav}>
-              <span className={styles.arrowDisabled}>‹</span>
-              <span className={styles.pageCount}>1/8</span>
-              <span className={styles.arrowActive}>›</span>
+            <div>
+              <p className="label">One-of-a-Kind</p>
+              <h2 className={styles.sectionTitle}>Original Works</h2>
             </div>
+            <Link href="/collections/originals" className="btn btn--outline btn--sm">
+              View All Originals →
+            </Link>
           </div>
 
           <div className={styles.productGrid}>
@@ -113,14 +104,15 @@ export default async function HomePage() {
         <div className="container">
           <div className={styles.commissionsCard}>
             <div className={styles.commissionsLeft}>
+              <p className="label">Custom Artwork</p>
               <h2 className={styles.commissionsTitle}>
-                Looking for custom artwork?
+                Looking for a Custom Piece?
               </h2>
               <p className={styles.commissionsSub}>
-                I'm currently taking commissions for custom still lifes, cocktails, and family dining memories.
+                Elena works with collectors and interior designers to create bespoke oil paintings of cocktails, celebratory tables, and favorite moments.
               </p>
               <Link href="/contact?type=commission" className={styles.commissionsBtn}>
-                Work With Elena
+                Commission Artwork
               </Link>
             </div>
 
@@ -139,7 +131,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 5. Consider a Gift Card! ──────────────── */}
+      {/* ── 5. Gift Card Section ─────────────────── */}
       <GiftCardSection />
 
       {/* ── 6. Print Club Monthly Subscription ─────── */}
@@ -160,9 +152,9 @@ export default async function HomePage() {
                 A New Print<br />Every Month
               </h2>
               <p className={styles.printClubDesc}>
-                Receive a hand-selected 8×10 archival giclée print each month — exclusive works never
-                available in the public shop. Subscribers also get 15% off all purchases
-                and early access to new originals.
+                Receive a curated 8×10 archival giclée print delivered each month — limited collector editions never
+                released to the general shop. Subscribers also enjoy 15% off all purchases
+                and priority access to new original collections.
               </p>
               <div className={styles.printClubPrice}>
                 <span className="price">$28</span>
@@ -176,7 +168,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 7. Newsletter (From the Studio) ──────── */}
+      {/* ── 7. Newsletter ─────────────────────────── */}
       <section className={styles.newsletter}>
         <div className="container container--narrow">
           <p className="label" style={{ textAlign: 'center' }}>Stay Connected</p>
@@ -184,8 +176,8 @@ export default async function HomePage() {
             From the Studio
           </h2>
           <p className={`${styles.newsletterDesc} text-center`}>
-            Get first access to new original drops, behind-the-scenes process, and
-            subscriber-only prints. No spam, ever.
+            Receive early announcements for original painting drops, studio updates, and
+            collector-only print releases.
           </p>
           <NewsletterForm
             className={styles.newsletterForm}

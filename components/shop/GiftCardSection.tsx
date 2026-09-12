@@ -25,8 +25,8 @@ export default function GiftCardSection() {
     setIsAdding(true)
     addItem({
       productId: `gift-card-${denomination}`,
-      slug: 'maura-k-spain-gift-card',
-      title: `Maura K Spain Gift Card - $${denomination}.00`,
+      slug: 'elena-moore-gift-card',
+      title: `Elena Moore Art Gift Card - $${denomination}.00`,
       price: denomination,
       quantity: quantity,
       size: `$${denomination}.00`,

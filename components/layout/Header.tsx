@@ -25,16 +25,14 @@ const navLinks: NavLinkItem[] = [
     label: 'Prints',
     dropdown: [
       { label: 'All Prints', href: '/collections/prints' },
-      { label: '200+ Mini Prints', href: '/shop?collection=mini-prints' },
       { label: 'Cocktails & Drinks', href: '/collections/cocktails' },
       { label: 'Food & Dining Still Life', href: '/collections/food-drink' },
       { label: 'Fruit & Still Life', href: '/collections/still-life' },
       { label: 'Botanicals & Flora', href: '/collections/botanicals' },
     ],
   },
-  { href: '/shop?collection=stickers', label: 'Stickers' },
-  { href: '/subscriptions', label: 'Print Club' },
   { href: '/contact?type=commission', label: 'Commissions' },
+  { href: '/subscriptions', label: 'Print Club' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ]
