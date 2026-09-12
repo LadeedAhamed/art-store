@@ -25,16 +25,22 @@ const collectionMeta: Record<string, { title: string; subtitle: string; descript
     description: 'Museum-quality giclée prints produced on 310gsm heavy cotton rag paper using pigment-based inks guaranteed to resist fading for over 100 years.',
     filter: { category: 'print', isActive: true },
   },
-  landscapes: {
-    title: 'Landscapes & Atmospheres',
-    subtitle: 'Horizon & Coastal Studies',
-    description: 'Atmospheric tonal landscapes and coastal compositions exploring light, weather, and tranquility.',
-    filter: { collection: 'landscapes', isActive: true },
+  cocktails: {
+    title: 'Cocktails & Drinks',
+    subtitle: 'Convivial Glassware Studies',
+    description: 'Vibrant paintings exploring spritzes, dirty martinis, classic cocktails, and sparkling glassware in afternoon sunlight.',
+    filter: { collection: 'food-drink', isActive: true },
+  },
+  'food-drink': {
+    title: 'Food & Drink Still Life',
+    subtitle: 'Convivial Glassware & Table Studies',
+    description: 'Vibrant paintings exploring spritzes, dirty martinis, fresh fruits, and the joyous warmth of gathering around the table.',
+    filter: { collection: 'food-drink', isActive: true },
   },
   'still-life': {
-    title: 'Still Life & Form',
+    title: 'Still Life & Food',
     subtitle: 'Studio Meditations',
-    description: 'Quiet, luminous compositions exploring organic forms, rustic ceramics, and the play of shadow on linen.',
+    description: 'Quiet, luminous compositions exploring berries, figs, peaches, and the play of shadow on fine Belgian linen.',
     filter: { collection: 'still-life', isActive: true },
   },
   botanicals: {
